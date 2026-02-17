@@ -360,7 +360,8 @@ public class HtmlUnitWebElement implements WrapsDriver, WebElement, Coordinates,
                 final HtmlPage page = (HtmlPage) element_.getPage();
                 try {
                     return page.getFullyQualifiedUrl(href.trim()).toString();
-                } catch (final MalformedURLException e) {
+                }
+                catch (final MalformedURLException e) {
                     return null;
                 }
             }
@@ -372,7 +373,8 @@ public class HtmlUnitWebElement implements WrapsDriver, WebElement, Coordinates,
                 final HtmlPage page = (HtmlPage) element_.getPage();
                 try {
                     return page.getFullyQualifiedUrl(link.trim()).toString();
-                } catch (final MalformedURLException e) {
+                }
+                catch (final MalformedURLException e) {
                     return null;
                 }
             }
