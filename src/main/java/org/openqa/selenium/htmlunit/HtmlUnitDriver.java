@@ -1831,7 +1831,7 @@ public class HtmlUnitDriver implements WebDriver, JavascriptExecutor, HasCapabil
             verifyDomain(cookie, domain);
 
             getWebClient().getCookieManager().addCookie(
-                    new org.htmlunit.util.Cookie(
+                    new org.htmlunit.http.Cookie(
                             domain,
                             cookie.getName(),
                             cookie.getValue(),
@@ -1885,8 +1885,8 @@ public class HtmlUnitDriver implements WebDriver, JavascriptExecutor, HasCapabil
             final CookieManager cookieManager = getWebClient().getCookieManager();
 
             final URL url = getRawUrl();
-            final Set<org.htmlunit.util.Cookie> rawCookies = getWebClient().getCookies(url);
-            for (final org.htmlunit.util.Cookie cookie : rawCookies) {
+            final Set<org.htmlunit.http.Cookie> rawCookies = getWebClient().getCookies(url);
+            for (final org.htmlunit.http.Cookie cookie : rawCookies) {
                 if (name.equals(cookie.getName())) {
                     cookieManager.removeCookie(cookie);
                 }
@@ -1903,8 +1903,8 @@ public class HtmlUnitDriver implements WebDriver, JavascriptExecutor, HasCapabil
             final CookieManager cookieManager = getWebClient().getCookieManager();
 
             final URL url = getRawUrl();
-            final Set<org.htmlunit.util.Cookie> rawCookies = getWebClient().getCookies(url);
-            for (final org.htmlunit.util.Cookie cookie : rawCookies) {
+            final Set<org.htmlunit.http.Cookie> rawCookies = getWebClient().getCookies(url);
+            for (final org.htmlunit.http.Cookie cookie : rawCookies) {
                 cookieManager.removeCookie(cookie);
             }
         }
@@ -1922,7 +1922,7 @@ public class HtmlUnitDriver implements WebDriver, JavascriptExecutor, HasCapabil
             }
 
             final Set<Cookie> result = new HashSet<>();
-            for (final org.htmlunit.util.Cookie c : getWebClient().getCookies(url)) {
+            for (final org.htmlunit.http.Cookie c : getWebClient().getCookies(url)) {
                 result .add(
                         new Cookie.Builder(c.getName(), c.getValue())
                         .domain(c.getDomain())
@@ -1937,8 +1937,8 @@ public class HtmlUnitDriver implements WebDriver, JavascriptExecutor, HasCapabil
             return Collections.unmodifiableSet(result);
         }
 
-        private org.htmlunit.util.Cookie convertSeleniumCookieToHtmlUnit(final Cookie cookie) {
-            return new org.htmlunit.util.Cookie(
+        private org.htmlunit.http.Cookie convertSeleniumCookieToHtmlUnit(final Cookie cookie) {
+            return new org.htmlunit.http.Cookie(
                     cookie.getDomain(),
                     cookie.getName(),
                     cookie.getValue(),
