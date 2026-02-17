@@ -38,6 +38,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -713,6 +715,42 @@ public abstract class WebTestCase {
      */
     protected void setGenerateTest_notYetImplemented(final boolean status) {
         generateTest_notYetImplemented_ = status;
+    }
+
+
+    /**
+     * Verifies the captured alerts.
+     * @param func actual string producer
+     * @param expected the expected string
+     * @throws Exception in case of failure
+     */
+    protected void verify(final Supplier<String> func, final String expected) throws Exception {
+        verify(func, expected, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * Verifies the captured alerts.
+     * @param func actual string producer
+     * @param expected the expected string
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
+     * @throws Exception in case of failure
+     */
+    protected void verify(final Supplier<String> func, final String expected,
+            final long maxWaitTime) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+
+        String actual = null;
+        while (System.currentTimeMillis() < maxWait) {
+            actual = func.get();
+
+            if (Objects.equals(expected, actual)) {
+                break;
+            }
+
+            Thread.sleep(50);
+        }
+
+        assertEquals(expected, actual);
     }
 
     /**
