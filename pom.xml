@@ -21,8 +21,8 @@
 
         <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([\.-]?\d+)?</maven.version.ignore>
 
-        <selenium.version>4.40.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v144</selenium.devtools.artifactId>
+        <selenium.version>4.41.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v145</selenium.devtools.artifactId>
         <htmlunit.version>5.0.0-SNAPSHOT</htmlunit.version>
 
         <jetty.version>12.1.6</jetty.version>
