@@ -107,8 +107,8 @@ public class HtmlUnitDriver2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2| [0]Html string [1]Unit string", "0|"})
     public void executeScriptParamSimpleArray() throws Exception {
-        executeScriptParam(getExpectedAlerts()[0], new String[] {"Html", "Unit"});
-        executeScriptParam(getExpectedAlerts()[1], new String[] {});
+        executeScriptParam(getExpectedAlerts()[0], "Html", "Unit");
+        executeScriptParam(getExpectedAlerts()[1]);
     }
 
     @Test
