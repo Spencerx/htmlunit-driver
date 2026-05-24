@@ -69,13 +69,14 @@ import org.htmlunit.corejs.javascript.IdScriptableObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.Location;
 import org.htmlunit.javascript.host.html.DocumentProxy;
@@ -1024,7 +1025,8 @@ public class HtmlUnitDriver implements WebDriver, JavascriptExecutor, HasCapabil
     }
 
     private Object[] convertScriptArgs(final HtmlPage page, final Object[] args) {
-        final HtmlUnitScriptable scope = page.getEnclosingWindow().getScriptableObject();
+        final org.htmlunit.javascript.host.Window window = page.getEnclosingWindow().getScriptableObject();
+        final VarScope scope = ScriptableObject.getTopLevelScope(window.getParentScope());
 
         if (scope == null) {
             return args;
@@ -1056,7 +1058,7 @@ public class HtmlUnitDriver implements WebDriver, JavascriptExecutor, HasCapabil
         return (HtmlPage) lastPage;
     }
 
-    private Object parseArgumentIntoJavascriptParameter(final Scriptable scope, Object arg) {
+    private Object parseArgumentIntoJavascriptParameter(final VarScope scope, Object arg) {
         while (arg instanceof WrapsElement) {
             arg = ((WrapsElement) arg).getWrappedElement();
         }

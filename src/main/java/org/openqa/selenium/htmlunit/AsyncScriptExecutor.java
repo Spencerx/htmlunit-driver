@@ -24,6 +24,8 @@ import org.htmlunit.ScriptException;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeJavaObject;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.lc.type.TypeInfo;
 import org.htmlunit.corejs.javascript.lc.type.TypeInfoFactory;
 import org.htmlunit.html.HtmlPage;
@@ -145,11 +147,14 @@ class AsyncScriptExecutor {
         final ScriptResult result = page_.executeJavaScript(script);
         final Function function = (Function) result.getJavaScriptResult();
 
+        final org.htmlunit.javascript.host.Window window = page_.getEnclosingWindow().getScriptableObject();
+        final VarScope scope = ScriptableObject.getTopLevelScope(window.getParentScope());
+
         // Finally, update the script with the callback host object.
         final TypeInfo staticType = TypeInfoFactory
-                                    .getOrElse(function, TypeInfoFactory.GLOBAL)
+                                    .getOrElse(scope, TypeInfoFactory.GLOBAL)
                                     .create(AsyncScriptResult.class);
-        final NativeJavaObject nativeJavaObject = new NativeJavaObject(function, asyncResult, staticType);
+        final NativeJavaObject nativeJavaObject = new NativeJavaObject(scope, asyncResult, staticType);
         function.put("host", function, nativeJavaObject);
 
         return function;

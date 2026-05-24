@@ -769,25 +769,6 @@ public enum HtmlUnitOption implements HtmlUnitOptionNames, OptionEnum {
     },
 
     /**
-     * Sets the WebSocket {@code maxTextMessageBufferSize}.
-     * <p>
-     * property: <b>webdriver.htmlunit.webSocketMaxTextMessageBufferSize</b><br>
-     * type: {@code int}<br>
-     * default: -1 (use default size)
-     */
-    WEB_SOCKET_MAX_TEXT_MESSAGE_BUFFER_SIZE(optWebSocketMaxTextMessageBufferSize, int.class, -1) {
-        @Override
-        public void insert(final WebClientOptions options, final Object value) {
-            options.setWebSocketMaxTextMessageBufferSize(TypeCodec.decodeInt(value));
-        }
-
-        @Override
-        public Object obtain(final WebClientOptions options) {
-            return options.getWebSocketMaxTextMessageBufferSize();
-        }
-    },
-
-    /**
      * Sets the WebSocket {@code maxBinaryMessageSize}.
      * <p>
      * property: <b>webdriver.htmlunit.webSocketMaxBinaryMessageSize</b><br>
@@ -803,25 +784,6 @@ public enum HtmlUnitOption implements HtmlUnitOptionNames, OptionEnum {
         @Override
         public Object obtain(final WebClientOptions options) {
             return options.getWebSocketMaxBinaryMessageSize();
-        }
-    },
-
-    /**
-     * Sets the WebSocket {@code maxBinaryMessageBufferSize}.
-     * <p>
-     * property: <b>webdriver.htmlunit.webSocketMaxBinaryMessageBufferSize</b><br>
-     * type: {@code int}<br>
-     * default: -1 (use default size)
-     */
-    WEB_SOCKET_MAX_BINARY_MESSAGE_BUFFER_SIZE(optWebSocketMaxBinaryMessageBufferSize, int.class, -1) {
-        @Override
-        public void insert(final WebClientOptions options, final Object value) {
-            options.setWebSocketMaxBinaryMessageBufferSize(TypeCodec.decodeInt(value));
-        }
-
-        @Override
-        public Object obtain(final WebClientOptions options) {
-            return options.getWebSocketMaxBinaryMessageBufferSize();
         }
     },
 

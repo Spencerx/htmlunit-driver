@@ -575,9 +575,7 @@ public class HtmlUnitDriverOptions extends AbstractDriverOptions<HtmlUnitDriverO
         target.setScreenHeight(source.getScreenHeight());
         target.setWebSocketEnabled(source.isWebSocketEnabled());
         target.setWebSocketMaxTextMessageSize(source.getWebSocketMaxTextMessageSize());
-        target.setWebSocketMaxTextMessageBufferSize(source.getWebSocketMaxTextMessageBufferSize());
         target.setWebSocketMaxBinaryMessageSize(source.getWebSocketMaxBinaryMessageSize());
-        target.setWebSocketMaxBinaryMessageBufferSize(source.getWebSocketMaxBinaryMessageBufferSize());
         target.setFetchPolyfillEnabled(source.isFetchPolyfillEnabled());
     }
 
